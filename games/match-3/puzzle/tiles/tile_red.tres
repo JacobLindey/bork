@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BasicTileType" format=3 uid="uid://b13vlcnqy8ixh"]
+
+[ext_resource type="Script" uid="uid://bbukh14fk78ty" path="res://puzzle/tiles/BasicTileType.cs" id="1_crjr7"]
+[ext_resource type="Texture2D" uid="uid://b34n64fqfmsu7" path="res://assets/shared/garden-cozy-kit/Post/Assets/Collectibles/Ruby-red.png" id="1_jkfrt"]
+
+[resource]
+script = ExtResource("1_crjr7")
+Name = "Ruby"
+Description = "Basic red tile."
+Texture = ExtResource("1_jkfrt")
+metadata/_custom_type_script = "uid://bbukh14fk78ty"

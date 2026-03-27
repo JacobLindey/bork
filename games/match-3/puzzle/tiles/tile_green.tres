@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BasicTileType" format=3 uid="uid://p5r3lfo76adn"]
+
+[ext_resource type="Texture2D" uid="uid://dup8g46o3cxkp" path="res://assets/shared/garden-cozy-kit/Post/Assets/Collectibles/Emerald-green.png" id="1_diwor"]
+[ext_resource type="Script" uid="uid://bbukh14fk78ty" path="res://puzzle/tiles/BasicTileType.cs" id="1_s5xnl"]
+
+[resource]
+script = ExtResource("1_s5xnl")
+Name = "Emerald"
+Description = "Basic green tile."
+Texture = ExtResource("1_diwor")
+metadata/_custom_type_script = "uid://bbukh14fk78ty"

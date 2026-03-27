@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dptwj2u85opi5"]
+
+[ext_resource type="Script" uid="uid://dno6cc6lkldin" path="res://puzzle/grid/GridCell.cs" id="1_dl1hb"]
+[ext_resource type="Texture2D" uid="uid://bs1ma8n7qphy3" path="res://assets/shared/garden-cozy-kit/Post/Assets/Bar/Clear-Button.png" id="2_ksgvy"]
+[ext_resource type="Texture2D" uid="uid://d2o8y2r8blp1o" path="res://assets/shared/garden-cozy-kit/Post/Assets/Collectibles/Empty-ruby.png" id="2_x68op"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x68op"]
+size = Vector2(107, 113)
+
+[node name="GridCell" type="Node2D" unique_id=337665241 node_paths=PackedStringArray("SelectionSprite", "TileContainer")]
+script = ExtResource("1_dl1hb")
+SelectionSprite = NodePath("SelectionSprite")
+TileContainer = NodePath("TileContainer")
+
+[node name="SelectionSprite" type="Sprite2D" parent="." unique_id=492291241]
+scale = Vector2(1.3072289, 1.3072289)
+texture = ExtResource("2_ksgvy")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=775742299]
+scale = Vector2(0.37878788, 0.37878788)
+texture = ExtResource("2_x68op")
+
+[node name="SelectionArea" type="Area2D" parent="." unique_id=74123976]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionArea" unique_id=326490622]
+shape = SubResource("RectangleShape2D_x68op")
+
+[node name="TileContainer" type="Node2D" parent="." unique_id=1561680149]
+
+[connection signal="input_event" from="SelectionArea" to="." method="OnSelectionAreaInputEvent"]
+[connection signal="mouse_entered" from="SelectionArea" to="." method="OnSelectionAreaMouseEntered"]
+[connection signal="mouse_exited" from="SelectionArea" to="." method="OnSelectionAreaMouseExited"]

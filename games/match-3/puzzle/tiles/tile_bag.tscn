@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bmgioehljaodm"]
+
+[ext_resource type="Script" uid="uid://d0m4ab8yn6kix" path="res://puzzle/tiles/TileBag.cs" id="1_i26wh"]
+
+[node name="TileBag" type="Node" unique_id=2117185106]
+script = ExtResource("1_i26wh")

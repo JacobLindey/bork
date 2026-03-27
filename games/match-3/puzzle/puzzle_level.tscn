@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bjxj44isho252"]
+
+[ext_resource type="Texture2D" uid="uid://clbeo051s8i71" path="res://assets/shared/garden-cozy-kit/Post/Assets/Backgound/Background_Blue.png" id="1_im31p"]
+[ext_resource type="PackedScene" uid="uid://b4ov0irm6q8lb" path="res://puzzle/grid/grid.tscn" id="1_iyt1t"]
+[ext_resource type="Script" uid="uid://beisp65biqcak" path="res://puzzle/PuzzleLevel.cs" id="1_wv3o6"]
+[ext_resource type="PackedScene" uid="uid://b3g0tpidasp13" path="res://puzzle/tiles/Tile.tscn" id="2_p81el"]
+[ext_resource type="Resource" uid="uid://p5r3lfo76adn" path="res://puzzle/tiles/tile_green.tres" id="3_qol5l"]
+[ext_resource type="PackedScene" uid="uid://bmgioehljaodm" path="res://puzzle/tiles/tile_bag.tscn" id="6_5xwp2"]
+
+[node name="PuzzleLevel" type="Node2D" unique_id=742835249 node_paths=PackedStringArray("Grid")]
+script = ExtResource("1_wv3o6")
+Grid = NodePath("Grid")
+TileFactory = ExtResource("2_p81el")
+TileType = ExtResource("3_qol5l")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1464088328]
+position = Vector2(963, 543)
+texture = ExtResource("1_im31p")
+
+[node name="Grid" parent="." unique_id=327146613 instance=ExtResource("1_iyt1t")]
+position = Vector2(712, 307)
+
+[node name="TileBag" parent="." unique_id=2117185106 instance=ExtResource("6_5xwp2")]

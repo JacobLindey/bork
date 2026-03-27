@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b4ov0irm6q8lb"]
+
+[ext_resource type="Script" uid="uid://6vlance2sm35" path="res://puzzle/grid/Grid.cs" id="1_2s2ra"]
+[ext_resource type="PackedScene" uid="uid://dptwj2u85opi5" path="res://puzzle/grid/grid_cell.tscn" id="2_j8fhq"]
+
+[node name="Grid" type="Node2D" unique_id=327146613]
+script = ExtResource("1_2s2ra")
+CellSize = Vector2(120, 120)
+CellFactory = ExtResource("2_j8fhq")

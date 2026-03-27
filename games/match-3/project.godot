@@ -11,8 +11,18 @@ config_version=5
 [application]
 
 config/name="Match3"
-config/features=PackedStringArray("4.6", "Mobile")
-config/icon="res://icon.svg"
+run/main_scene="uid://bjxj44isho252"
+config/features=PackedStringArray("4.6", "C#", "Mobile")
+config/icon="uid://d1djhbeeciepj"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/window_width_override=720
+window/size/window_height_override=540
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [dotnet]
 

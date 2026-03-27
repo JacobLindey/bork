@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b3g0tpidasp13"]
+
+[ext_resource type="Script" uid="uid://bb2h8y8nehsb7" path="res://puzzle/tiles/Tile.cs" id="1_a62re"]
+[ext_resource type="Texture2D" uid="uid://4o7d4oiq470t" path="res://assets/shared/garden-cozy-kit/Post/Assets/Icons/Skull.png" id="2_a62re"]
+
+[node name="Tile" type="Node2D" unique_id=1479424059 node_paths=PackedStringArray("Sprite")]
+script = ExtResource("1_a62re")
+Sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=422402641]
+texture = ExtResource("2_a62re")
