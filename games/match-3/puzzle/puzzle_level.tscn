@@ -116,7 +116,12 @@ layout_mode = 2
 layout_mode = 2
 text = "FILL EMPTY CELLS"
 
+[node name="ApplyGravityButton" type="Button" parent="Control/VBoxContainer3/GridFillGroup/VBoxContainer2" unique_id=687645388]
+layout_mode = 2
+text = "APPLY GRAVITY"
+
 [connection signal="pressed" from="Control/VBoxContainer3/MatchRuleGroup/VBoxContainer2/RemoveMatchesButton" to="." method="ProcessMatches"]
 [connection signal="pressed" from="Control/VBoxContainer3/MatchRuleGroup/VBoxContainer2/CheckMatchesButton" to="." method="CheckMatches"]
 [connection signal="pressed" from="Control/VBoxContainer3/MatchRuleGroup/VBoxContainer2/ClearHighlightButton" to="." method="ClearHighlight"]
 [connection signal="pressed" from="Control/VBoxContainer3/GridFillGroup/VBoxContainer2/FillEmptyButton" to="." method="FillGrid"]
+[connection signal="pressed" from="Control/VBoxContainer3/GridFillGroup/VBoxContainer2/ApplyGravityButton" to="." method="ApplyGravity"]

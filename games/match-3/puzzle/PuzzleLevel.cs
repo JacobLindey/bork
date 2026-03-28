@@ -66,6 +66,30 @@ public partial class PuzzleLevel : Node2D
         }
     }
 
+    private void ApplyGravity()
+    {
+        for (var col = 0; col < Grid.Columns; col++)
+        {
+            for (var row = Grid.Rows-1; row >= 0; row--)
+            {
+                var checkedCoords = new Vector2I(col, row);
+                if (Grid.GetCell(checkedCoords).HasTile)
+                {
+                    continue;
+                }
+
+                for (var ri = row - 1; ri >= 0; ri--)
+                {
+                    var c = new Vector2I(col, ri);
+                    if (Grid.GetCell(c).HasTile)
+                    {
+                        Grid.Swap(checkedCoords, c);
+                    }
+                }
+            }
+        }
+    }
+
     private void Score(TileMatch match)
     {
         foreach (var cell in match.Cells)

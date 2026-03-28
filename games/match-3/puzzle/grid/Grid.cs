@@ -181,13 +181,34 @@ public partial class Grid : Node2D
         return coords.X + coords.Y * Columns;
     }
 
-    private void Swap(GridCell a, GridCell b)
+    public void Swap(GridCell a, GridCell b)
     {
         GD.Print($"{a.Coordinates} <-> {b.Coordinates}");
-        var temp = b.ContainedTile;
-        b.SetTile(a.ContainedTile);
-        a.SetTile(temp);
+
+        if (a.HasTile && !b.HasTile)
+        {
+            b.SetTile(a.ContainedTile);
+        }
+        else if (!a.HasTile && b.HasTile)
+        {
+            a.SetTile(b.ContainedTile);
+        }
+        else
+        {
+            var temp = b.ContainedTile;
+            b.SetTile(a.ContainedTile);
+            a.SetTile(temp);
+        }
+        
         OnGridChanged();
+    }
+    
+    public void Swap(Vector2I a, Vector2I b)
+    {
+        var cellA = GetCell(a);
+        var cellB = GetCell(b);
+        
+        Swap(cellA, cellB);
     }
 
     private void OnGridChanged()
