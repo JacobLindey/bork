@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "journal/2026-03-27.md",
+                "file": "journal/2026-03-28.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-03-27"
+              "title": "2026-03-28"
             }
           }
         ]
@@ -186,6 +186,7 @@
   "active": "379c0f64889ebaa7",
   "lastOpenFiles": [
     "Match3.md",
+    "journal/2026-03-28.md",
     "journal/2026-03-27.md",
     "templates/daily-note.md",
     "journal",

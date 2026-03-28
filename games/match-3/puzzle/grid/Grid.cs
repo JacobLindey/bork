@@ -2,6 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
+public delegate void GridChangedEventHandler(GridChangedEventArgs args);
+
+public class GridChangedEventArgs
+{
+    
+}
+
 public partial class Grid : Node2D
 {
     private GridCell[] _grid = [];
@@ -9,8 +16,7 @@ public partial class Grid : Node2D
     private uint _rows;
     
     private readonly List<GridCell> _selectionStack = new();
-    private List<GridCell> _availableNeighbors = [];
-    
+ 
     public int Columns { get; private set; }
     public int Rows { get; private set; }
     
@@ -19,8 +25,23 @@ public partial class Grid : Node2D
     
     [Export]
     public PackedScene CellFactory { get; private set; }
-
+    
     public IEnumerable<GridCell> EmptyCells => _grid.Where(x => !x.HasTile);
+
+    public event GridChangedEventHandler Changed;
+    
+    public IEnumerable<GridCell> Enumerate()
+    {
+        for (var x = 0; x < Columns; x++)
+        {
+            for (var y = 0; y < Rows; y++)
+            {
+                var coords = new Vector2I(x, y);
+                yield return GetCell(coords);
+            }
+        }
+    }
+    
     
     public override void _Ready()
     {
@@ -47,6 +68,20 @@ public partial class Grid : Node2D
                 SetCell(coords, CreateCell(coords));
             }
         }
+
+        OnGridChanged();
+    }
+
+    public bool TryGetCell(Vector2I coords, out GridCell cell)
+    {
+        if (HasCell(coords))
+        {
+            cell = GetCell(coords);
+            return true;
+        }
+
+        cell = null;
+        return false;
     }
     
     private GridCell CreateCell(Vector2I coords)
@@ -71,15 +106,14 @@ public partial class Grid : Node2D
     {
         if (_selectionStack.Count == 0)
         {
-            _availableNeighbors = GetNeighbors(cell);
             cell.SetSelected(true);
             _selectionStack.Add(cell);
         }
         else
         {
             if (
-                _selectionStack[0] == cell || 
-                !_availableNeighbors.Contains(cell))
+                _selectionStack.Last() == cell || 
+                !GetNeighbors(_selectionStack.Last()).Contains(cell))
             {
                 ClearSelectionStack();
             }
@@ -99,7 +133,6 @@ public partial class Grid : Node2D
             cell.SetSelected(false);
         }
         _selectionStack.Clear();
-        _availableNeighbors.Clear();
     }
 
     private readonly List<Vector2I> _directions =
@@ -126,8 +159,11 @@ public partial class Grid : Node2D
 
     public bool HasCell(Vector2I coords)
     {
-        var idx = GetIndex(coords);
-        return 0 <= idx && idx < _grid.Length;
+        return
+            coords.X >= 0 &&
+            coords.X < Columns &&
+            coords.Y >= 0 &&
+            coords.Y < Rows;
     }
 
     public GridCell GetCell(Vector2I coords)
@@ -142,13 +178,20 @@ public partial class Grid : Node2D
 
     private int GetIndex(Vector2I coords)
     {
-        return coords.X * Rows + coords.Y;
+        return coords.X + coords.Y * Columns;
     }
 
-    private static void Swap(GridCell a, GridCell b)
+    private void Swap(GridCell a, GridCell b)
     {
+        GD.Print($"{a.Coordinates} <-> {b.Coordinates}");
         var temp = b.ContainedTile;
         b.SetTile(a.ContainedTile);
         a.SetTile(temp);
+        OnGridChanged();
+    }
+
+    private void OnGridChanged()
+    {
+        Changed?.Invoke(new GridChangedEventArgs());
     }
 }

@@ -11,6 +11,9 @@
 [ext_resource type="Resource" uid="uid://dm4ko6enhxjwp" path="res://puzzle/tiles/types/tile_purple.tres" id="9_uuw07"]
 [ext_resource type="Script" uid="uid://2ykcy81s2840" path="res://puzzle/tiles/LootTable.cs" id="9_vrrwf"]
 [ext_resource type="Resource" uid="uid://c1l5wfcnwrdlb" path="res://puzzle/tiles/types/tile_blue.tres" id="10_pg1ki"]
+[ext_resource type="Texture2D" uid="uid://4o7d4oiq470t" path="res://assets/shared/garden-cozy-kit/Post/Assets/Icons/Skull.png" id="11_pg1ki"]
+[ext_resource type="Script" uid="uid://bbukh14fk78ty" path="res://puzzle/tiles/types/BasicTileType.cs" id="12_gwval"]
+[ext_resource type="PackedScene" uid="uid://y317itclg1aw" path="res://puzzle/tiles/tile_matcher.tscn" id="12_uuw07"]
 
 [sub_resource type="Resource" id="Resource_uuw07"]
 script = ExtResource("7_wivfe")
@@ -41,11 +44,21 @@ script = ExtResource("9_vrrwf")
 Entries = Array[Object]([SubResource("Resource_uuw07"), SubResource("Resource_pg1ki"), SubResource("Resource_7vmae"), SubResource("Resource_vlypd")])
 metadata/_custom_type_script = "uid://2ykcy81s2840"
 
-[node name="PuzzleLevel" type="Node2D" unique_id=742835249 node_paths=PackedStringArray("Grid", "TileBag")]
+[sub_resource type="Resource" id="Resource_k6rrt"]
+script = ExtResource("12_gwval")
+Name = "Error"
+Description = "This tile's type didn't load properly"
+Texture = ExtResource("11_pg1ki")
+metadata/_custom_type_script = "uid://bbukh14fk78ty"
+
+[sub_resource type="Theme" id="Theme_gwval"]
+default_font_size = 40
+
+[node name="PuzzleLevel" type="Node2D" unique_id=742835249 node_paths=PackedStringArray("Grid", "TileBag", "TileMatcher")]
 script = ExtResource("1_wv3o6")
 Grid = NodePath("Grid")
 TileBag = NodePath("TileBag")
-TileFactory = ExtResource("2_p81el")
+TileMatcher = NodePath("TileMatcher")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1464088328]
 position = Vector2(963, 543)
@@ -56,3 +69,54 @@ position = Vector2(712, 307)
 
 [node name="TileBag" parent="." unique_id=2117185106 instance=ExtResource("6_5xwp2")]
 LootTable = SubResource("Resource_gwval")
+DefaultType = SubResource("Resource_k6rrt")
+TileFactory = ExtResource("2_p81el")
+
+[node name="TileMatcher" parent="." unique_id=303114770 instance=ExtResource("12_uuw07")]
+
+[node name="Control" type="Control" parent="." unique_id=191946154]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 588.0
+offset_bottom = 669.0
+theme = SubResource("Theme_gwval")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control" unique_id=1842943451]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MatchRuleGroup" type="FoldableContainer" parent="Control/VBoxContainer3" unique_id=1372042744]
+layout_mode = 2
+title = "MATCHING RULES"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/VBoxContainer3/MatchRuleGroup" unique_id=1251866848]
+layout_mode = 2
+
+[node name="RemoveMatchesButton" type="Button" parent="Control/VBoxContainer3/MatchRuleGroup/VBoxContainer2" unique_id=1267475758]
+layout_mode = 2
+text = "REMOVE MATCHES"
+
+[node name="CheckMatchesButton" type="Button" parent="Control/VBoxContainer3/MatchRuleGroup/VBoxContainer2" unique_id=733692379]
+layout_mode = 2
+text = "HIGHLIGHT MATCHES"
+
+[node name="ClearHighlightButton" type="Button" parent="Control/VBoxContainer3/MatchRuleGroup/VBoxContainer2" unique_id=818337784]
+layout_mode = 2
+text = "CLEAR HIGHLIGHT"
+
+[node name="GridFillGroup" type="FoldableContainer" parent="Control/VBoxContainer3" unique_id=1878389031]
+layout_mode = 2
+title = "GRID FILL"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/VBoxContainer3/GridFillGroup" unique_id=444654279]
+layout_mode = 2
+
+[node name="FillEmptyButton" type="Button" parent="Control/VBoxContainer3/GridFillGroup/VBoxContainer2" unique_id=1255043969]
+layout_mode = 2
+text = "FILL EMPTY CELLS"
+
+[connection signal="pressed" from="Control/VBoxContainer3/MatchRuleGroup/VBoxContainer2/RemoveMatchesButton" to="." method="ProcessMatches"]
+[connection signal="pressed" from="Control/VBoxContainer3/MatchRuleGroup/VBoxContainer2/CheckMatchesButton" to="." method="CheckMatches"]
+[connection signal="pressed" from="Control/VBoxContainer3/MatchRuleGroup/VBoxContainer2/ClearHighlightButton" to="." method="ClearHighlight"]
+[connection signal="pressed" from="Control/VBoxContainer3/GridFillGroup/VBoxContainer2/FillEmptyButton" to="." method="FillGrid"]

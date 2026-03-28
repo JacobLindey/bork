@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 public partial class GridCell : Node2D
@@ -10,8 +11,8 @@ public partial class GridCell : Node2D
     private Node2D TileContainer;
     
     public CellState State { get; set; }
-    
-    public Tile ContainedTile { get; private set; }
+
+    public Tile ContainedTile => TileContainer.GetChildOrNull<Tile>(0);
     
     public Vector2I Coordinates { get; private set; }
 
@@ -25,8 +26,31 @@ public partial class GridCell : Node2D
     public void SetTile(Tile tile)
     {
         tile.Reparent(TileContainer);
-        ContainedTile = tile;
         tile.QueuePosition(GlobalPosition);
+    }
+
+    public void RemoveTile()
+    {
+        if (!HasTile)
+        {
+            return;
+        }
+
+        var temp = ContainedTile;
+        temp.Reparent(this);
+        temp.QueueFree();
+    }
+
+    public bool TryGetTile(out Tile tile)
+    {
+        if (HasTile)
+        {
+            tile = ContainedTile;
+            return true;
+        }
+
+        tile = null;
+        return false;
     }
     
     public override void _Process(double delta)
@@ -57,14 +81,26 @@ public partial class GridCell : Node2D
         }
     }
 
+    public void SetHover(bool value)
+    {
+        if (value)
+        {
+            State |= CellState.Hover;
+        }
+        else
+        {
+            State &= ~CellState.Hover;
+        }
+    }
+
     public void OnSelectionAreaMouseEntered()
     {
-        State |= CellState.Hover;
+        SetHover(true);
     }
 
     public void OnSelectionAreaMouseExited()
     {
-        State &= ~CellState.Hover;
+        SetHover(false);
     }
 }
 

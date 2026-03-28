@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://y317itclg1aw"]
+
+[ext_resource type="Script" uid="uid://cayi4832g4wb5" path="res://puzzle/tiles/TileMatcher.cs" id="1_0e7sh"]
+
+[node name="TileMatcher" type="Node" unique_id=303114770]
+script = ExtResource("1_0e7sh")
