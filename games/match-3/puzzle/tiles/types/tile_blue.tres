@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BasicTileType" format=3 uid="uid://c1l5wfcnwrdlb"]
+
+[ext_resource type="Script" uid="uid://bbukh14fk78ty" path="res://puzzle/tiles/types/BasicTileType.cs" id="1_3w760"]
+[ext_resource type="Texture2D" uid="uid://h5nd7mjm5pbg" path="res://assets/shared/garden-cozy-kit/Post/Assets/Collectibles/Diamond-blue.png" id="1_nueoi"]
+
+[resource]
+script = ExtResource("1_3w760")
+Name = "Diamond"
+Description = "Basic blue tile."
+Texture = ExtResource("1_nueoi")
+metadata/_custom_type_script = "uid://bbukh14fk78ty"

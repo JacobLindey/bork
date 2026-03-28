@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BasicTileType" format=3 uid="uid://dm4ko6enhxjwp"]
+
+[ext_resource type="Script" uid="uid://bbukh14fk78ty" path="res://puzzle/tiles/types/BasicTileType.cs" id="1_v14yx"]
+[ext_resource type="Texture2D" uid="uid://dw8cba5mucqql" path="res://assets/shared/garden-cozy-kit/Post/Assets/Collectibles/Sphire-purple.png" id="1_wss3u"]
+
+[resource]
+script = ExtResource("1_v14yx")
+Name = "Sphire"
+Description = "Basic purple tile."
+Texture = ExtResource("1_wss3u")
+metadata/_custom_type_script = "uid://bbukh14fk78ty"

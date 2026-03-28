@@ -4,12 +4,12 @@ public partial class PuzzleLevel : Node2D
 {
     [Export]
     public Grid Grid { get; private set; }
+    
+    [Export]
+    public TileBag TileBag { get; private set; }
 
     [Export]
     private PackedScene TileFactory;
-
-    [Export]
-    private TileType TileType;
 
     public override void _Ready()
     {
@@ -25,7 +25,7 @@ public partial class PuzzleLevel : Node2D
         foreach (var cell in Grid.EmptyCells)
         {
             var tile = TileFactory.Instantiate<Tile>();
-            tile.SetType(TileType);
+            tile.SetType(TileBag.Next);
             cell.SetTile(tile);
         }
     }

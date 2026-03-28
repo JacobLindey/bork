@@ -1,6 +1,9 @@
 using Godot;
-using System;
 
 public partial class TileBag : Node
 {
+    [Export]
+    private LootTable LootTable;
+
+    public TileType Next => LootTable.GetNextEntry<TileType>();
 }

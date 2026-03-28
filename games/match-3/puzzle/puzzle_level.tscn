@@ -4,14 +4,48 @@
 [ext_resource type="PackedScene" uid="uid://b4ov0irm6q8lb" path="res://puzzle/grid/grid.tscn" id="1_iyt1t"]
 [ext_resource type="Script" uid="uid://beisp65biqcak" path="res://puzzle/PuzzleLevel.cs" id="1_wv3o6"]
 [ext_resource type="PackedScene" uid="uid://b3g0tpidasp13" path="res://puzzle/tiles/Tile.tscn" id="2_p81el"]
-[ext_resource type="Resource" uid="uid://p5r3lfo76adn" path="res://puzzle/tiles/tile_green.tres" id="3_qol5l"]
+[ext_resource type="Resource" uid="uid://b13vlcnqy8ixh" path="res://puzzle/tiles/types/tile_red.tres" id="3_qol5l"]
 [ext_resource type="PackedScene" uid="uid://bmgioehljaodm" path="res://puzzle/tiles/tile_bag.tscn" id="6_5xwp2"]
+[ext_resource type="Script" uid="uid://bbns4rat0v8e8" path="res://puzzle/tiles/LootTableEntry.cs" id="7_wivfe"]
+[ext_resource type="Resource" uid="uid://p5r3lfo76adn" path="res://puzzle/tiles/types/tile_green.tres" id="8_lrrgq"]
+[ext_resource type="Resource" uid="uid://dm4ko6enhxjwp" path="res://puzzle/tiles/types/tile_purple.tres" id="9_uuw07"]
+[ext_resource type="Script" uid="uid://2ykcy81s2840" path="res://puzzle/tiles/LootTable.cs" id="9_vrrwf"]
+[ext_resource type="Resource" uid="uid://c1l5wfcnwrdlb" path="res://puzzle/tiles/types/tile_blue.tres" id="10_pg1ki"]
 
-[node name="PuzzleLevel" type="Node2D" unique_id=742835249 node_paths=PackedStringArray("Grid")]
+[sub_resource type="Resource" id="Resource_uuw07"]
+script = ExtResource("7_wivfe")
+Resource = ExtResource("3_qol5l")
+Weight = 1
+metadata/_custom_type_script = "uid://bbns4rat0v8e8"
+
+[sub_resource type="Resource" id="Resource_pg1ki"]
+script = ExtResource("7_wivfe")
+Resource = ExtResource("8_lrrgq")
+Weight = 1
+metadata/_custom_type_script = "uid://bbns4rat0v8e8"
+
+[sub_resource type="Resource" id="Resource_7vmae"]
+script = ExtResource("7_wivfe")
+Resource = ExtResource("9_uuw07")
+Weight = 1
+metadata/_custom_type_script = "uid://bbns4rat0v8e8"
+
+[sub_resource type="Resource" id="Resource_vlypd"]
+script = ExtResource("7_wivfe")
+Resource = ExtResource("10_pg1ki")
+Weight = 1
+metadata/_custom_type_script = "uid://bbns4rat0v8e8"
+
+[sub_resource type="Resource" id="Resource_gwval"]
+script = ExtResource("9_vrrwf")
+Entries = Array[Object]([SubResource("Resource_uuw07"), SubResource("Resource_pg1ki"), SubResource("Resource_7vmae"), SubResource("Resource_vlypd")])
+metadata/_custom_type_script = "uid://2ykcy81s2840"
+
+[node name="PuzzleLevel" type="Node2D" unique_id=742835249 node_paths=PackedStringArray("Grid", "TileBag")]
 script = ExtResource("1_wv3o6")
 Grid = NodePath("Grid")
+TileBag = NodePath("TileBag")
 TileFactory = ExtResource("2_p81el")
-TileType = ExtResource("3_qol5l")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1464088328]
 position = Vector2(963, 543)
@@ -21,3 +55,4 @@ texture = ExtResource("1_im31p")
 position = Vector2(712, 307)
 
 [node name="TileBag" parent="." unique_id=2117185106 instance=ExtResource("6_5xwp2")]
+LootTable = SubResource("Resource_gwval")
