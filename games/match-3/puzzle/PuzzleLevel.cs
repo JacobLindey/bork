@@ -25,6 +25,7 @@ public partial class PuzzleLevel : Node2D
         foreach (var cell in Grid.EmptyCells)
         {
             var tile = TileFactory.Instantiate<Tile>();
+            AddChild(tile);
             tile.SetType(TileBag.Next);
             cell.SetTile(tile);
         }

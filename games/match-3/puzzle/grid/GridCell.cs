@@ -24,7 +24,7 @@ public partial class GridCell : Node2D
     
     public void SetTile(Tile tile)
     {
-        TileContainer.AddChild(tile);
+        tile.Reparent(TileContainer);
         ContainedTile = tile;
         tile.QueuePosition(GlobalPosition);
     }
